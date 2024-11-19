@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "1ee23373-1a0a-43c7-9629-f897abd998b8",
+		"name": "Library Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17292576",
+		"_collection_link": "https://lunar-desert-589237.postman.co/workspace/My-Workspace~5ecb9a25-bbbc-4ebb-84f7-d7901d1149e1/collection/17292576-1ee23373-1a0a-43c7-9629-f897abd998b8?action=share&source=collection_link&creator=17292576"
+	},
+	"item": [
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "All Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{test-library}}/api/authors",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{test-library}}/api/authors/5",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"authors",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Badrajaya",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "kasdkjasd akdshkajshdkas dkah dkahsdkha kdha ksdh kad",
+									"type": "text"
+								},
+								{
+									"key": "birth_date",
+									"value": "2000-12-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{test-library}}/api/authors",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Badra12",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "bio",
+									"value": "bio untuk id 4",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "birth_date",
+									"value": "2000-12-01",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{test-library}}/api/authors/4",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"authors",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{test-library}}/api/authors/3",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"authors",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "All Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{test-library}}/api/books",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{test-library}}/api/books/2",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "author_id",
+									"value": "13",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Buku Teras 1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Ini Adalah buku sejati",
+									"type": "text"
+								},
+								{
+									"key": "publish_date",
+									"value": "1999-12-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{test-library}}/api/books",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "author_id",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Buku Satu",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Ini Adalah buku sejati",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "publish_date",
+									"value": "1996-12-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{test-library}}/api/books/1",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{test-library}}/api/books/3",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Associations",
+			"item": [
+				{
+					"name": "Association",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{test-library}}/api/authors/12/books",
+							"host": [
+								"{{test-library}}"
+							],
+							"path": [
+								"api",
+								"authors",
+								"12",
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
