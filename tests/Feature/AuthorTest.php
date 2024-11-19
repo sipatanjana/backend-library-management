@@ -27,11 +27,35 @@ class AuthorTest extends TestCase
         return $this->put("/api/authors/$id", $data, ['Accept' => 'application/json']);
     }
 
-    public function test_get_all_authors(): void
+    public function test_get_all_null_authors(): void
     {
         $response = $this->get('/api/authors');
 
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => []
+        ]);
+    }
+
+    public function test_get_all_authors(): void
+    {
+        $response = $this->createAuthor();
+        $response = $this->get('/api/authors');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'name',
+                    'bio',
+                    'birth_date',
+                    'deleted_at',
+                    'created_at',
+                    'updated_at',
+                ]
+            ]
+        ]);
     }
 
     public function test_create_authors(): void

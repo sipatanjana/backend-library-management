@@ -24,14 +24,15 @@ class BookTest extends TestCase
 
     private function createBook(array $data = [])
     {
-        $this->createAuthor();
         $model = DB::table('authors')->latest('id')->first();
-        $data = [
-            'author_id' => $model->id,
-            'title' => 'Lorem ipsum',
-            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            'publish_date' => '2000-12-01',
-        ];
+        if (!$data) {
+            $data = [
+                'author_id' => $model->id,
+                'title' => 'Lorem ipsum',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'publish_date' => '2000-12-01',
+            ];
+        }
 
         return $this->post('/api/books', $data, ['Accept' => 'application/json']);
     }
@@ -41,15 +42,84 @@ class BookTest extends TestCase
         return $this->put("/api/books/$id", $data, ['Accept' => 'application/json']);
     }
 
+    public function test_get_all_with_definition_author_books(): void
+    {
+        $this->createAuthor();
+        $model = DB::table('authors')->latest('id')->first();
+
+        $data = [
+            'author_id' => $model->id,
+            'title' => 'Lorem ipsum',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'publish_date' => '2000-12-01',
+        ];
+
+        $data_two = [
+            'author_id' => $model->id,
+            'title' => 'Lorem dolor',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'publish_date' => '2000-12-01',
+        ];
+
+        $this->createBook($data);
+        $this->createBook($data_two);
+
+        $response = $this->getJson("/api/authors/$model->id/books");
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'author_id',
+                    'title',
+                    'description',
+                    'publish_date',
+                    'deleted_at',
+                    'created_at',
+                    'updated_at',
+                ]
+            ]
+        ]);
+        $response->assertJsonCount(2, 'data');
+    }
+
     public function test_get_all_books(): void
+    {
+        $this->createAuthor();
+        $response = $this->createBook();
+        $response = $this->get('/api/books');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'author_id',
+                    'title',
+                    'description',
+                    'publish_date',
+                    'deleted_at',
+                    'created_at',
+                    'updated_at',
+                ]
+            ]
+        ]);
+    }
+
+    public function test_get_all_null_books(): void
     {
         $response = $this->get('/api/books');
 
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => []
+        ]);
     }
 
     public function test_create_books(): void
     {
+        $this->createAuthor();
         $response = $this->createBook();
 
         $response->assertStatus(200);
@@ -118,6 +188,7 @@ class BookTest extends TestCase
     public function test_handles_errors_duplicate_create_books(): void
     {
         // Create With Duplicate Name With Same Author
+        $this->createAuthor();
         $this->createBook();
         $model = DB::table('books')->latest('id')->first();
         $failUniqueData = [
@@ -137,6 +208,7 @@ class BookTest extends TestCase
 
     public function test_detail_books(): void
     {
+        $this->createAuthor();
         $this->createBook();
         $model = DB::table('books')->latest('id')->first();
         $response = $this->getJson("/api/books/$model->id");
@@ -154,6 +226,7 @@ class BookTest extends TestCase
 
     public function test_update_books(): void
     {
+        $this->createAuthor();
         $response = $this->createBook();
         $model = DB::table('books')->latest('id')->first();
 
@@ -176,6 +249,7 @@ class BookTest extends TestCase
 
     public function test_delete_books(): void
     {
+        $this->createAuthor();
         $response = $this->createBook();
         $model = DB::table('books')->latest('id')->first();
         $response = $this->delete("/api/books/$model->id");
