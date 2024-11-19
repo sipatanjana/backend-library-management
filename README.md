@@ -1,15 +1,16 @@
 # Guidenes
 - Clone github repo
-- Lakukan instalasi 
+- Perform the installation 
 ```bash
 composer install
 ```
-- Lakukan konfigurasi database pada .env
-- Lakukan migration dan seeding data
+- Configure the database on .env
+- Sample local configuration on .env.local
+- Perform the migration
 ```bash
 php artisan migrate
 ```
-- Jalankan testing melalui console
+- Run testing through the console
 ```bash
 php artisan test
 ```
